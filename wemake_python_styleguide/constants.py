@@ -77,6 +77,36 @@ MODULE_METADATA_VARIABLES_BLACKLIST: Final = frozenset((
 
 #: List of variable names we forbid to use.
 VARIABLE_NAMES_BLACKLIST: Final = frozenset((
+    # Common wrong-tense booleans:
+    'active',
+    'approved',
+    'authenticated',
+    'available',
+    'bound',
+    'complete',
+    'done',
+    'draft',
+    'dynamic',
+    'enabled',
+    'expired',
+    'finished',
+    'force',
+    'found',
+    'inactive',
+    'invalid',
+    'new',
+    'null',
+    'optional',
+    'pinned',
+    'preferred',
+    'processed',
+    'rejected',
+    'required',
+    'secure',
+    'unavailable',
+    'valid',
+    'verified',
+
     # Meaningless words:
     'data',
     'result',
