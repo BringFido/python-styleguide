@@ -53,7 +53,6 @@ FUNCTIONS_BLACKLIST: Final = frozenset((
     'dir',
 
     # Attribute access:
-    'hasattr',
     'delattr',
 
     # Gratis:
