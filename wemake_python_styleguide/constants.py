@@ -46,27 +46,11 @@ UNUSED_PLACEHOLDER: Final = '_'
 
 #: List of functions we forbid to use.
 FUNCTIONS_BLACKLIST: Final = frozenset((
-    # Code generation:
-    'eval',
-    'exec',
-    'compile',
-
-    # Termination:
-    'exit',
-    'quit',
-
     # Magic:
     'globals',
     'locals',
     'vars',
     'dir',
-
-    # IO:
-    'print',
-    'pprint',
-    'pprint.pprint',
-    'input',
-    'breakpoint',
 
     # Attribute access:
     'hasattr',
@@ -79,9 +63,6 @@ FUNCTIONS_BLACKLIST: Final = frozenset((
 
     # Dynamic imports:
     '__import__',
-
-    # OOP:
-    'staticmethod',
 
     # Mypy:
     'reveal_type',
@@ -328,7 +309,6 @@ FUTURE_IMPORTS_WHITELIST: Final = frozenset((
 #: List of blacklisted module names.
 MODULE_NAMES_BLACKLIST: Final = frozenset((
     'util',
-    'utils',
     'utilities',
     'helpers',
 ))
