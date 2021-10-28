@@ -32,6 +32,7 @@ MAX_NOQA_COMMENTS: Final = 10  # guessed
 
 #: List of nested classes' names we allow to use.
 NESTED_CLASSES_WHITELIST: Final = (
+    'Media',  # django admin
     'Meta',  # django forms, models, drf, etc
     'Params',  # factoryboy specific
 )
