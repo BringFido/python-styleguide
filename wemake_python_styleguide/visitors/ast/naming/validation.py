@@ -63,7 +63,10 @@ class _SimpleNameValidator(object):
             naming.UnicodeNameViolation,
         ),
         _NamingPredicate(
-            lambda name: access.is_unused(name) and len(name) > 1,
+            lambda name: (
+                access.is_unused(name)
+                and any(char != '_' for char in name)
+            ),
             naming.WrongUnusedVariableNameViolation,
         ),
     )
