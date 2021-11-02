@@ -37,7 +37,7 @@ class WrongModuleNameVisitor(BaseFilenameVisitor):
 
     def _check_module_name_length(self) -> None:
         # Allow names from allowed_domain_names even if wrong
-        if name in self.options.allowed_domain_names:
+        if self.stem in self.options.allowed_domain_names:
             return
 
         min_length = self.options.min_name_length
