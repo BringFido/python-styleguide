@@ -154,6 +154,10 @@ class _RegularNameValidator(_SimpleNameValidator):
         self._ensure_readable_name(node, name)
 
     def _ensure_length(self, node: ast.AST, name: str) -> None:
+        # Allow names from allowed_domain_names even if too short
+        if name in self._options.allowed_domain_names:
+            return
+
         min_length = self._options.min_name_length
         if logical.is_too_short_name(name, min_length=min_length):
             self._error_callback(

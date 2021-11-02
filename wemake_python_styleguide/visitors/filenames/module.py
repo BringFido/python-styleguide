@@ -36,6 +36,10 @@ class WrongModuleNameVisitor(BaseFilenameVisitor):
             self.add_violation(naming.UnicodeNameViolation(text=self.stem))
 
     def _check_module_name_length(self) -> None:
+        # Allow names from allowed_domain_names even if wrong
+        if name in self.options.allowed_domain_names:
+            return
+
         min_length = self.options.min_name_length
         if logical.is_too_short_name(self.stem, min_length=min_length):
             self.add_violation(
