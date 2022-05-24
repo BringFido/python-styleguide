@@ -16,32 +16,58 @@ Semantic versioning in our case means:
   But, in the future we might change the configuration names/logic,
   change the client facing API, change code conventions significantly, etc.
 
+## 0.17.1
 
-## {{ Next Version }}
+### Features
+- Adds `__init_subclass__` in the beginning of accepted methods order as per WPS338
+
+## 0.16.2
+
+### Misc
+- Adds full violation codes to docs and `BaseViolation.full_code` #2409 
+
+## 0.16.1
+
+### Bugfixes
+
+- Fixes crash on `'Literal["raise"]'` annotation #2341
+- Fixes `WPS471` was not detected on complex assignment targets #2301
+- Fixes `flake8-bandit` and `bandit` version conflict #2368
+
+
+## 0.16.0
 
 ## Features
 
+- Supports new `flake8` version `4.x`
 - Now `InconsistentYieldViolation` and `InconsistentReturnViolation` are raised
   when `yield` or `return` is used with `None`
-  where plain version should be used
+  where plain version should be used #2151
+- Dot `'.'` and comma `','` do not count against string literal overuse limit anymore #2209
 - Added `RedundantEnumerateViolation` #1825
 - Adds `RaiseFromItselfViolation` #2133
 - Adds `ConsecutiveSlicesViolation` #2064
-- Adds `KwargsUnpackingInClassDefinitionViolation` #1714
+- Adds `KwargsUnpackingInClassDefinitionViolation` #1754
+- `DirectMagicAttributeAccessViolation` now only flags instances for which
+  a known alternative exists #2268
+- Forbids getting collection element of list by unpacking #1824
+- Now `WPS227` forbids returning tuples that are too long #1731
 
 ### Bugfixes
 
 - Fixes that `InconsistentComprehensionViolation` was ignoring
   misaligned `in` expressions #2075
+- Fixes some common magic methods not being recognized as such #2281
 
 ### Misc
 
 - Removes all `Raises:` from docstrings, they were unused
-- Added example to README.md
+- Added example to `README.md`
 - Added `why strict is good`
-- Replaced all `python` with `Python` in README.md
-- Improve Docs: Fixed all typos and grammatical errors in CHANGELOG
+- Replaced all `python` with `Python` in `README.md`
+- Improve Docs: Fixed all typos and grammatical errors in `CHANGELOG.md`
 - Updated documentation with the recommended `isort` config. #1934
+- Updates `typing_extensions` to `4.x`
 
 
 ## 0.15.3
@@ -79,6 +105,10 @@ Semantic versioning in our case means:
 ### Misc
 
 - Updates GitHub Action's base Python image version to `3.8.8`
+
+### Features
+
+- Adds a math operations evaluator to improve and allow several violation checks.
 
 
 ## 0.15.1

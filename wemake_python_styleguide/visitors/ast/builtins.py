@@ -10,10 +10,10 @@ from typing import (
     FrozenSet,
     List,
     Optional,
+    Pattern,
     Sequence,
     Union,
 )
-from typing.re import Pattern
 
 from typing_extensions import Final, final
 
@@ -73,7 +73,7 @@ class WrongStringVisitor(base.BaseNodeVisitor):
     ))
 
     #: Copied from https://stackoverflow.com/a/30018957/4842742
-    _modulo_string_pattern: ClassVar[Pattern] = re.compile(
+    _modulo_string_pattern: ClassVar[Pattern[str]] = re.compile(
         r"""                             # noqa: WPS323
         (                                # start of capture group 1
             %                            # literal "%"
@@ -142,7 +142,7 @@ class WrongStringVisitor(base.BaseNodeVisitor):
         if parent and strings.is_doc_string(parent):
             return  # we allow `%s` in docstrings: they cannot be formatted.
 
-        if self._modulo_string_pattern.search(text_data):
+        if text_data and self._modulo_string_pattern.search(text_data):
             if not self._is_modulo_pattern_exception(parent):
                 self.add_violation(
                     consistency.ModuloStringFormatViolation(node),
@@ -378,6 +378,12 @@ class WrongAssignmentVisitor(base.BaseNodeVisitor):
             self.add_violation(
                 best_practices.SingleElementDestructuringViolation(node),
             )
+        elif variables.is_getting_element_by_unpacking(targets):
+            self.add_violation(
+                best_practices.GettingElementByUnpackingViolation(
+                    node,
+                ),
+            )
 
         for target in targets:
             if not variables.is_valid_unpacking_target(target):
@@ -449,12 +455,17 @@ class WrongCollectionVisitor(base.BaseNodeVisitor):
             if dict_key is None:
                 continue
 
+            evaluates_to_float = False
+            if isinstance(dict_key, ast.BinOp):
+                evaluated_key = getattr(dict_key, 'wps_op_eval', None)
+                evaluates_to_float = isinstance(evaluated_key, float)
+
             real_key = operators.unwrap_unary_node(dict_key)
             is_float_key = (
                 isinstance(real_key, ast.Num) and
                 isinstance(real_key.n, float)
             )
-            if is_float_key:
+            if is_float_key or evaluates_to_float:
                 self.add_violation(best_practices.FloatKeyViolation(dict_key))
 
     def _check_unhashable_elements(

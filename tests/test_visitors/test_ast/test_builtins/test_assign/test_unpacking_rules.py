@@ -1,6 +1,7 @@
 import pytest
 
 from wemake_python_styleguide.violations.best_practices import (
+    GettingElementByUnpackingViolation,
     SingleElementDestructuringViolation,
     WrongUnpackingViolation,
 )
@@ -19,6 +20,9 @@ tuple_assignment2 = '{0}, second = (1, 2)'
 
 spread_assignment1 = '{0}, *second = [1, 2, 3]'
 spread_assignment2 = 'first, *{0} = [1, 2, 3]'
+spread_assignment3 = '*{0}, second = [1, 2, 3]'
+spread_assignment4 = '(first, second), *{0} = ...'
+spread_assignment5 = '*{0}, self.second = [1, 2, 3]'
 
 for_assignment = """
 def wrapper():
@@ -273,4 +277,34 @@ def test_single_element_destructing(
         visitor,
         [SingleElementDestructuringViolation],
         ignored_types=UnpackingIterableToListViolation,
+    )
+
+
+@pytest.mark.parametrize('code', [
+    spread_assignment2,
+    spread_assignment3,
+    spread_assignment4,
+    spread_assignment5,
+])
+@pytest.mark.parametrize('definition', [
+    '_',
+    '_data',
+])
+def test_element_getting_by_unpacking(
+    assert_errors,
+    parse_ast_tree,
+    code,
+    definition,
+    default_options,
+):
+    """Testing that getting element by unpacking is restricted."""
+    tree = parse_ast_tree(code.format(definition))
+
+    visitor = WrongAssignmentVisitor(default_options, tree=tree)
+    visitor.run()
+
+    assert_errors(
+        visitor,
+        [GettingElementByUnpackingViolation],
+        ignored_types=WrongUnpackingViolation,
     )
