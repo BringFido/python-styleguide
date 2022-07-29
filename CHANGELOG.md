@@ -16,15 +16,22 @@ Semantic versioning in our case means:
   But, in the future we might change the configuration names/logic,
   change the client facing API, change code conventions significantly, etc.
 
-## 0.17.1
+
+## WIP
 
 ### Features
-- Adds `__init_subclass__` in the beginning of accepted methods order as per WPS338
 
-## 0.16.2
+- Adds `__init_subclass__` in the beginning of accepted methods
+  order as per WPS338 #2411
 
 ### Misc
-- Adds full violation codes to docs and `BaseViolation.full_code` #2409 
+
+- Adds full violation codes to docs and `BaseViolation.full_code` #2409
+- Fix documentation mismatch between default setting
+  for `max-string-usages` and enforced rule #2456
+- Domain name was changed from `wemake-python-stylegui.de`
+  to `wemake-python-styleguide.rtfd.io`
+
 
 ## 0.16.1
 
@@ -215,7 +222,7 @@ removing dependencies that can be removed, and fixing bugs.
 
 There are breaking changes ahead!
 
-We also have this [nice migration guide](https://wemake-python-stylegui.de/en/latest/pages/changelog/migration_to_0_14.html).
+We also have this [nice 0.14 migration guide](https://wemake-python-styleguide.rtfd.io/en/latest/pages/changelog/migration_to_0_14.html).
 
 ### Features
 
@@ -661,7 +668,7 @@ We had to fix it before it is too late.
 So, we broke existing error codes.
 And now we can promise not to do it ever again.
 
-We also have this [nice migration guide](https://wemake-python-stylegui.de/en/latest/pages/changelog/migration_to_0_11.html)
+We also have this [nice 0.11 migration guide](https://wemake-python-styleguide.rtfd.io/en/latest/pages/changelog/migration_to_0_11.html)
 for you to rename your violations with a script.
 
 ### Features

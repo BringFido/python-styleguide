@@ -28,10 +28,10 @@ It is also recommended to take a look at these resources:
 
 ## Developer's documentation
 
-Make sure that you are familiar with [developer's documentation](https://wemake-python-stylegui.de/en/latest/pages/api/index.html).
+Make sure that you are familiar with [developer's documentation](https://wemake-python-styleguide.rtfd.io/en/latest/pages/api/index.html).
 
 That's a main starting point to the future development.
-You can jump start into the development of new rules by reading ["Creating a new rule tutorial"](https://wemake-python-stylegui.de/en/latest/pages/api/tutorial.html).
+You can jump start into the development of new rules by reading ["Creating a new rule tutorial"](https://wemake-python-styleguide.rtfd.io/en/latest/pages/api/tutorial.html).
 
 
 ## Dependencies
@@ -59,11 +59,12 @@ you will have to do several things:
 
 Run `make test` to run everything we have!
 
-#### Building on Windows
+### Building on Windows
 
 - Building directly in Windows does not work.
 - Instead, use a Windows Subsystem for Linux (WSL) such as Ubuntu 18.04 LTS that you can get from the Microsoft Store.
 - Clone the project to a part of the WSL where Windows does not overwrite permissions, for example _directly to the home of the WSL_ (do `cd` and then `git clone`). That problem looks like [this](https://github.com/wemake-services/wemake-python-styleguide/issues/1007#issuecomment-562719702) and you can read more about why changing the permissions does not work [here](https://github.com/Microsoft/WSL/issues/81).
+
 
 ## Tests
 
