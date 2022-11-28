@@ -241,6 +241,10 @@ class UnusedVariableUsageVisitor(BaseNodeVisitor):
             # gettext and similar tools.
             return
 
+        if assigned_name == '__':
+            # Another special case for gettext_lazy
+            return
+
         if not is_created:
             self.add_violation(
                 naming.UnusedVariableIsUsedViolation(node, text=assigned_name),

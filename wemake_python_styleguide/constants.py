@@ -46,30 +46,13 @@ UNUSED_PLACEHOLDER: Final = '_'
 
 #: List of functions we forbid to use.
 FUNCTIONS_BLACKLIST: Final = frozenset((
-    # Code generation:
-    'eval',
-    'exec',
-    'compile',
-
-    # Termination:
-    'exit',
-    'quit',
-
     # Magic:
     'globals',
     'locals',
     'vars',
     'dir',
 
-    # IO:
-    'print',
-    'pprint',
-    'pprint.pprint',
-    'input',
-    'breakpoint',
-
     # Attribute access:
-    'hasattr',
     'delattr',
 
     # Gratis:
@@ -79,9 +62,6 @@ FUNCTIONS_BLACKLIST: Final = frozenset((
 
     # Dynamic imports:
     '__import__',
-
-    # OOP:
-    'staticmethod',
 
     # Mypy:
     'reveal_type',
@@ -97,6 +77,36 @@ MODULE_METADATA_VARIABLES_BLACKLIST: Final = frozenset((
 
 #: List of variable names we forbid to use.
 VARIABLE_NAMES_BLACKLIST: Final = frozenset((
+    # Common wrong-tense booleans:
+    'active',
+    'approved',
+    'authenticated',
+    'available',
+    'bound',
+    'complete',
+    'done',
+    'draft',
+    'dynamic',
+    'enabled',
+    'expired',
+    'finished',
+    'force',
+    'found',
+    'inactive',
+    'invalid',
+    'new',
+    'null',
+    'optional',
+    'pinned',
+    'preferred',
+    'processed',
+    'rejected',
+    'required',
+    'secure',
+    'unavailable',
+    'valid',
+    'verified',
+
     # Meaningless words:
     'data',
     'result',
@@ -126,6 +136,7 @@ VARIABLE_NAMES_BLACKLIST: Final = frozenset((
     'parameters',
 
     # Confusables:
+    'yes',
     'no',
     'true',
     'false',
@@ -370,7 +381,6 @@ FUTURE_IMPORTS_WHITELIST: Final = frozenset((
 #: List of blacklisted module names.
 MODULE_NAMES_BLACKLIST: Final = frozenset((
     'util',
-    'utils',
     'utilities',
     'helpers',
 ))

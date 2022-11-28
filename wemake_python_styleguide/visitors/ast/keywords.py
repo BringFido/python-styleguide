@@ -174,8 +174,6 @@ class WrongKeywordVisitor(BaseNodeVisitor):
     """Finds wrong keywords."""
 
     _forbidden_keywords: ClassVar[AnyNodes] = (
-        ast.Pass,
-        ast.Delete,
         ast.Global,
         ast.Nonlocal,
     )
