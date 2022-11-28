@@ -21,8 +21,41 @@ Semantic versioning in our case means:
 
 ### Features
 
+- Bump `flake8` to version `5.x`
+- Bump `flake8-bandit` to version `^4.1`
+- Added `ChainedIsViolation` #2443
+- Added `BuggySuperContextViolation` #2310
+
+### Bugfixes
+- Make `generic_visit()` check script properly handle `with` statements.
+- Allow calling magic methods with the same name as the enclosing method #2381
+- Fix WrongEmptyLinesCountViolation false positive #2531
+
+### Misc
+
+- Replaced `flakehell` mentions to `flakeheaven` #2409
+
+
+## 0.17.0
+
+### Features
+
+- **Breaking**: drops `python3.6` support
+- Adds support for pattern matching naming rules, same as other variables
+- Adds `--show-violation-links` option to show links to violation docs
 - Adds `__init_subclass__` in the beginning of accepted methods
   order as per WPS338 #2411
+- Adds `WrongEmptyLinesCountViolation` to check
+  for too many lines in functions and methods definitions #2486
+
+### Bugfixes
+
+- Fixes `WPS226` false positives on `|` use in `SomeType | AnotherType`
+  type hints syntax
+- Now `-1` is not reported to be an overused expression
+- Allow `__aiter__` to be async iterator
+- Adds violation method name to error message of `YieldMagicMethodViolation`
+- Fixes direct docker image invocation #2492
 
 ### Misc
 

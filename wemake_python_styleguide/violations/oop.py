@@ -28,6 +28,7 @@ Summary
    WrongSuperCallAccessViolation
    WrongDescriptorDecoratorViolation
    UnpythonicGetterSetterViolation
+   BuggySuperContextViolation
 
 Respect your objects
 --------------------
@@ -48,6 +49,7 @@ Respect your objects
 .. autoclass:: WrongSuperCallAccessViolation
 .. autoclass:: WrongDescriptorDecoratorViolation
 .. autoclass:: UnpythonicGetterSetterViolation
+.. autoclass:: BuggySuperContextViolation
 
 """
 
@@ -445,6 +447,7 @@ class AsyncMagicMethodViolation(ASTViolation):
     Forbid certain async magic methods.
 
     We allow to make ``__anext__``, ``__aenter__``, ``__aexit__`` async.
+    We allow to make ``__aiter__`` async if it is a generator (contains yield).
     We also allow custom magic methods to be async.
 
     See
@@ -485,6 +488,7 @@ class YieldMagicMethodViolation(ASTViolation):
     Forbid ``yield`` inside of certain magic methods.
 
     We allow to make ``__iter__`` a generator.
+    We allow to make ``__aiter__`` an async generator.
     See
     :py:data:`~wemake_python_styleguide.constants.YIELD_MAGIC_METHODS_BLACKLIST`
     for the whole list of blacklisted generator magic methods.
@@ -519,7 +523,7 @@ class YieldMagicMethodViolation(ASTViolation):
 
     """
 
-    error_template = 'Found forbidden `yield` magic method usage'
+    error_template = 'Found forbidden `yield` magic method usage: {0}'
     code = 611
     previous_codes = {439, 435}
 
@@ -669,3 +673,33 @@ class UnpythonicGetterSetterViolation(ASTViolation):
 
     error_template = 'Found unpythonic getter or setter'
     code = 615
+
+
+@final
+class BuggySuperContextViolation(ASTViolation):
+    """
+    Calling super() in buggy context.
+
+    Reasoning:
+        Call to `super()` without arguments will cause unexpected `TypeError`
+        in a number of specific contexts, e.g. dict/set/list comprehensions
+        and generator expressions.
+
+        Read more: https://bugs.python.org/issue46175
+
+    Solution:
+        Use `super(cls, self)` instead in those cases.
+
+    Example::
+
+        # Correct
+        (super(cls, self).augment(it) for it in items)
+
+        # Wrong
+        (super().augment(it) for it in items)
+
+    .. versionadded:: 0.18.0
+    """
+
+    error_template = 'Found incorrect form of `super()` call for the context'
+    code = 616

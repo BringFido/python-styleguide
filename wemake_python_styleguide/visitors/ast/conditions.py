@@ -3,7 +3,7 @@ from collections import defaultdict
 from functools import reduce
 from typing import ClassVar, DefaultDict, List, Mapping, Set, Type
 
-from typing_extensions import Final, final
+from typing_extensions import Final, TypeAlias, final
 
 from wemake_python_styleguide.compat.aliases import ForNodes
 from wemake_python_styleguide.logic import source, walk
@@ -20,6 +20,7 @@ from wemake_python_styleguide.violations.consistency import (
     MultilineConditionsViolation,
 )
 from wemake_python_styleguide.violations.refactoring import (
+    ChainedIsViolation,
     ImplicitInConditionViolation,
     NegatedConditionsViolation,
     SimplifiableReturningIfViolation,
@@ -30,7 +31,7 @@ from wemake_python_styleguide.violations.refactoring import (
 from wemake_python_styleguide.visitors.base import BaseNodeVisitor
 from wemake_python_styleguide.visitors.decorators import alias
 
-_OperatorPairs = Mapping[Type[ast.boolop], Type[ast.cmpop]]
+_OperatorPairs: TypeAlias = Mapping[Type[ast.boolop], Type[ast.cmpop]]
 _ELSE_NODES: Final = (*ForNodes, ast.While, ast.Try)
 
 
@@ -324,3 +325,16 @@ class ImplicitBoolPatternsVisitor(BaseNodeVisitor):
 
         if not CompareBounds(node).is_valid():
             self.add_violation(ImplicitComplexCompareViolation(node))
+
+
+@final
+class ChainedIsVisitor(BaseNodeVisitor):
+    """Is used to find chained `is` comparisons."""
+
+    def visit_Compare(self, node: ast.Compare) -> None:
+        """Checks for chained 'is' operators in comparisons."""
+        if len(node.ops) > 1:
+            if all([isinstance(op, ast.Is) for op in node.ops]):
+                self.add_violation(ChainedIsViolation(node))
+
+        self.generic_visit(node)

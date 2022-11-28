@@ -11,6 +11,7 @@ from wemake_python_styleguide.visitors.ast import (  # noqa: WPS235
     conditions,
     decorators,
     exceptions,
+    function_empty_lines,
     functions,
     imports,
     iterables,
@@ -86,6 +87,7 @@ PRESET: Final = (
     conditions.BooleanConditionVisitor,
     conditions.ImplicitBoolPatternsVisitor,
     conditions.UselessElseVisitor,
+    conditions.ChainedIsVisitor,
 
     iterables.IterableUnpackingVisitor,
 
@@ -95,6 +97,7 @@ PRESET: Final = (
     classes.WrongSlotsVisitor,
     classes.ClassAttributeVisitor,
     classes.ClassMethodOrderVisitor,
+    classes.BuggySuperCallVisitor,
 
     blocks.BlockVariableVisitor,
     blocks.AfterBlockVariablesVisitor,
@@ -106,6 +109,8 @@ PRESET: Final = (
     decorators.WrongDecoratorVisitor,
 
     redundancy.RedundantEnumerateVisitor,
+
+    function_empty_lines.WrongEmptyLinesCountVisitor,
 
     # Modules:
     modules.EmptyModuleContentsVisitor,
