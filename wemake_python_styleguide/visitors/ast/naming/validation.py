@@ -65,8 +65,8 @@ class _SimpleNameValidator(object):
         ),
         _NamingPredicate(
             lambda name: (
-                access.is_unused(name)
-                and any(char != '_' for char in name)
+                access.is_unused(name) and
+                any(char != '_' for char in name)
             ),
             naming.WrongUnusedVariableNameViolation,
         ),
