@@ -382,7 +382,9 @@ for literal in bad_concatenation:  # noqa: WPS327, WPS328
     continue
 
 with open(bad_concatenation):  # noqa: WPS328
-    del {'a': 1}['a']  # noqa: WPS420
+    pass
+
+del {'a': 1}['a']  # noqa: WPS420 (added to replace the "pass" error)
 
 
 try:
