@@ -22,10 +22,8 @@ PLUGINS = (
     'N802',  # pep8-naming
     'P101',  # flake8-string-format
     'Q003',  # flake8-quotes
-    'S101',  # flake8-bandit
     'T100',  # flake8-debugger
     'RST215',  # flake8-rst-docstrings
-    'DAR101',  # darglint
 )
 
 

@@ -126,7 +126,8 @@ class _ImportFromValidator(_BaseImportValidator):
             for name in filter(None, (alias.name, alias.asname)):
                 is_regular_import = (
                     (alias.asname and name != alias.asname) or
-                    not imports.is_vague_import(name)
+                    not imports.is_vague_import(name) or
+                    name in self._options.allowed_domain_names
                 )
 
                 if not is_regular_import:
