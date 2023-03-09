@@ -51,10 +51,6 @@ FUNCTIONS_BLACKLIST: Final = frozenset((
     'exec',
     'compile',
 
-    # Termination:
-    'exit',
-    'quit',
-
     # Magic:
     'globals',
     'locals',
@@ -69,7 +65,6 @@ FUNCTIONS_BLACKLIST: Final = frozenset((
     'breakpoint',
 
     # Attribute access:
-    'hasattr',
     'delattr',
 
     # Gratis:
@@ -79,9 +74,6 @@ FUNCTIONS_BLACKLIST: Final = frozenset((
 
     # Dynamic imports:
     '__import__',
-
-    # OOP:
-    'staticmethod',
 
     # Mypy:
     'reveal_type',
@@ -127,6 +119,7 @@ VARIABLE_NAMES_BLACKLIST: Final = frozenset((
     'parameters',
 
     # Confusables:
+    'yes',
     'no',
     'true',
     'false',
@@ -371,7 +364,6 @@ FUTURE_IMPORTS_WHITELIST: Final = frozenset((
 #: List of blacklisted module names.
 MODULE_NAMES_BLACKLIST: Final = frozenset((
     'util',
-    'utils',
     'utilities',
     'helpers',
 ))

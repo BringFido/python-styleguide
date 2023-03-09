@@ -136,7 +136,7 @@ def some():  # noqa: WPS110
 
 
 del {'a': 1}['a']  # noqa: WPS420
-hasattr(object, 'some')  # noqa: WPS421
+delattr(object, 'some')  # noqa: WPS421
 value = 1  # noqa: WPS110
 VALUE = 1  # noqa: WPS110
 x = 2  # noqa: WPS111
@@ -153,7 +153,7 @@ def some_function():
     _should_not_be_used = 1  # noqa: WPS122
     my_print(_should_not_be_used)  # noqa: WPS121
 
-used, __ = 1, 2  # noqa: WPS123
+used, ___ = 1, 2  # noqa: WPS123
 
 class Mem0Output:  # noqa: WPS124
     # See:
@@ -383,7 +383,9 @@ for literal in bad_concatenation:  # noqa: WPS327, WPS328
     continue
 
 with open(bad_concatenation):  # noqa: WPS328
-    pass  # noqa: WPS420
+    pass
+
+del {'a': 1}['a']  # noqa: WPS420 (added to replace the "pass" error)
 
 
 try:

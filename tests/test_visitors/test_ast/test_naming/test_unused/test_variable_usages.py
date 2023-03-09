@@ -121,8 +121,8 @@ def test_correct_variable_usage(
 
 
 @pytest.mark.parametrize('bad_name', [
-    '__',
     '___',
+    '____',
 ])
 @pytest.mark.parametrize('code', [
     annotation,
@@ -160,6 +160,7 @@ def test_wrong_variable_usage(
 
 @pytest.mark.parametrize('bad_name', [
     '_',  # we are forced to allow this name, because django uses it a lot.
+    '__',
 ])
 @pytest.mark.parametrize('code', [
     annotation,
