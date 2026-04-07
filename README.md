@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This fork is no longer maintained and should not be used. Use [`ruff`](https://github.com/astral-sh/ruff) paired with a newer version of the upstream repository, [`wemake python styleguide`](https://github.com/wemake-services/wemake-python-styleguide).
+
 # BringFido Python Style Guide
 
 This is a fork of the excellent https://github.com/wemake-services/wemake-python-styleguide. We make use of 99% of it, and have forked it to adjust the few core rules that are useful, but overly restrictive.
